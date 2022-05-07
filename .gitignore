@@ -1,6 +1,10 @@
 # Compiled class file
 *.class
 
+# UML diagrams
+*.dia
+*.dia~
+
 # Log file
 *.log
 
