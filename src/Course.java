@@ -1,14 +1,44 @@
 package src;
 
-public class Course extends Topic {
+public class Course {
+    private String name;
+    private String schedule;
+    private String auxMaterial;
     private String units;
-    private int grades[] = new int[Integer.parseInt(units)];
+    private int grades[];
 
     public Course(){}
 
-    public Course(String units, String name, String schedule) {
-        super(name, schedule);
+    public Course(String name, String schedule, String auxMaterial, String units, int grades[]) {
+        this.name = name;
+        this.schedule = schedule;
+        this.auxMaterial = auxMaterial;
         this.units = units;
+        this.grades = grades;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
+
+    public String getAuxMaterial() {
+        return auxMaterial;
+    }
+
+    public void setAuxMaterial(String auxMaterial) {
+        this.auxMaterial = auxMaterial;
     }
 
     public String getUnits() {

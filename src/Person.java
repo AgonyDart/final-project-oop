@@ -9,7 +9,6 @@ public abstract class Person {
     protected String email;
     protected String phonenumber;
     protected String schedule;
-    // type photo;
     protected Date timestamp;
 
     public Person() {
