@@ -2,8 +2,8 @@ package src;
 
 import java.util.Scanner;
 
-public class Grupo implements Interfaz {
-    private String refEstudiantes[] = new refEstudiantes[100];
+public class Grupo implements Interfaz{
+    private String refEstudiantes[] = new String [100];
     private String refProfesor;
     private String refSalon;
     private String horario;
@@ -18,8 +18,8 @@ public class Grupo implements Interfaz {
     }
 
     public void mostrar() {
-      System.out.println(">> Profesor :"+profesor); 
-      System.out.println(">> Salon    :"+salon);
+      System.out.println(">> Profesor :"+refProfesor); 
+      System.out.println(">> Salon    :"+refSalon);
       System.out.println(">> Horario  :"+horario);
     }
 
@@ -28,26 +28,26 @@ public class Grupo implements Interfaz {
       System.out.println(">> Profesor :"); //agregar un metodo para hacerlo automatico como estudiantes por fa xd
       refProfesor = leer.nextLine();
       System.out.println(">> Salon    :");
-      refSalon = leer.nextLine()
+      refSalon = leer.nextLine();
       System.out.println(">> Horario  :");
-      horario = leer.nextLine()
+      horario = leer.nextLine();
     }
   public void capturarRefEstudiantes(String string) {//pensado para guardar automatico los estudiantes que tengan el atributo que los linkea al grupo pa guardarlos al arrray
   
   }
-  public void mostrarEstudiantes(String string) {//segun yo si jala pero no lo probe
-    String textForSearching;
-    for (int i = 0; i < cPersonas; i++) {
-      if (personas[i] != null && personas[i].whatI().equals("Estudiante")) {
-        Estudiante e = (Estudiante) personas[i];
-        textForSearching = e.getGrupo();
-        if (textForSearching.contains(string)) {
-            System.out.println(e.getNoControl+e.getGrupo);
-        }
-        textForSearching = "";
-      }
-    }
-  }
+  // public void mostrarEstudiantes(String string) {//segun yo si jala pero no lo probe
+  //   String textForSearching;
+  //   for (int i = 0; i < cPersonas; i++) {
+  //     if (personas[i] != null && personas[i].whatI().equals("Estudiante")) {
+  //       Estudiante e = (Estudiante) personas[i];
+  //       textForSearching = e.getGrupo();
+  //       if (textForSearching.contains(string)) {
+  //           System.out.println(e.getNoControl+e.getGrupo);
+  //       }
+  //       textForSearching = "";
+  //     }
+  //   }
+  // }
 
     public String queSoy() {
         return "Grupo";
@@ -78,10 +78,10 @@ public class Grupo implements Interfaz {
     }
 
     public String getHorario() {
-        return Horario;
+        return horario;
     }
 
     public void setHorario(String Horario) {
-        this.Horario = Horario;
+        this.horario = Horario;
     }
 }

@@ -41,7 +41,6 @@ public class Profesor extends Persona {
         gradoEstudios = leer.nextLine();
         System.out.print("<< Asignatura     :");
         asignatura = leer.nextLine();
-        leer.close();
     }
 
     @Override

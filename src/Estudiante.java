@@ -2,7 +2,8 @@ package src;
 
 import java.util.Scanner;
 
-public class Estudiante extends Persona {
+
+public class Estudiante extends Persona{
     private String noControl;
     private String genero;
     private boolean estado;
@@ -30,11 +31,14 @@ public class Estudiante extends Persona {
 
     @Override
     public void capturar() {
-        Scanner leer = new Scanner(System.in);
+        Scanner con=new Scanner(System.in);
         System.out.println("\n( >> >> Capturar Estudiante << << )");
         super.capturar();
-        
-        leer.close();
+        noControl= "2112"+ nombre.substring(0,1);
+        System.out.print(">> Genero         :" ); 
+        genero=con.nextLine();
+        estado=true;
+
     }
 
     @Override

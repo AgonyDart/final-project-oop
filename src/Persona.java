@@ -2,7 +2,7 @@ package src;
 
 import java.util.Scanner;
 
-public abstract class Persona implements Interfaz {
+public abstract class Persona implements Interfaz,java.io.Serializable {
     protected String nombre;
     protected String telefono;
     protected String noSS;
@@ -34,7 +34,6 @@ public abstract class Persona implements Interfaz {
         noSS = leer.nextLine();
         System.out.print("<< Grupo          :");
         grupo = leer.nextLine();
-        leer.close();
     }
 
     public String queSoy(){
