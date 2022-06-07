@@ -30,9 +30,6 @@ public class Grupo implements Interfaz{
       System.out.println(">> Salon    :");
       refSalon = leer.nextLine();
     }
-	public void capturarRefEstudiantes(String string) {
-  
-	}
 
     public String queSoy() {
         return "Grupo";
