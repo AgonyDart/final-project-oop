@@ -236,11 +236,8 @@ public class Escuelota {
 	}
 	
 	public void mostrarGrupos(){
-        int cont=0;
-        for(int i=0;i<cGrupos;i++){
+        for(int i=0;i<cGrupos;i++)
                 grupos[i].mostrar();
-                cont++;
-		}
 	}
     
     public void buscarEstudiantesG(){
