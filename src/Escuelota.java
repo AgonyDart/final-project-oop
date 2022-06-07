@@ -1,5 +1,8 @@
 package src;
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
+
 import java.util.Arrays;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -126,6 +129,46 @@ public class Escuelota {
             }
         }
         return indexEstudiantes;
+    }
+
+    public void buscarEstudiantes(){
+        Scanner con=new Scanner(System.in);
+        System.out.println("Ingrese algun caracter a buscar");
+        String cadena = con.nextLine();
+        cadena = cadena.toLowerCase();
+        String megacadena;
+        for(int i=0;i<cPersons;i++){
+            Estudiante e;
+            if(personas[i].queSoy().equals("Estudiante"))
+                e=(Estudiante)personas[i];
+            else
+                continue;
+            megacadena=e.getNoControl()+e.getMaterias()+e.getNombre()+e.getGrupo()+e.getTelefono()+e.getNoSS();
+            megacadena=megacadena.toLowerCase();
+            if(megacadena.contains(cadena))
+                personas[i].mostrar();
+            megacadena="";
+        }
+    }
+
+    public void buscarProfesores(){
+        Scanner con=new Scanner(System.in);
+        System.out.println("Ingrese algun caracter a buscar");
+        String cadena = con.nextLine();
+        cadena = cadena.toLowerCase();
+        String megacadena;
+        for(int i=0;i<cPersons;i++){
+            Profesor e;
+            if(personas[i].queSoy().equals("Profesor"))
+                e=(Profesor)personas[i];
+            else
+                continue;
+            megacadena=e.getNombre()+e.getAsignatura()+e.getGradoEstudios()+e.getRfc();
+            megacadena=megacadena.toLowerCase();
+            if(megacadena.contains(cadena))
+                personas[i].mostrar();
+            megacadena="";
+        }
     }
     
     //Profesores 

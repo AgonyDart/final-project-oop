@@ -24,6 +24,9 @@ public class App {
                 case 12:
                     escuelota.capturarEstudiante();
                     break;
+                case 13:
+                    escuelota.buscarEstudiantes();
+                    break;
                 case 14:
                     escuelota.borrarEstudiante();
                     break;
@@ -32,6 +35,9 @@ public class App {
                     break;
                 case 22:
                     escuelota.capturarProfesor();
+                    break;
+                case 23:
+                    escuelota.buscarProfesores();
                     break;
                 case 24:
                     escuelota.borrarProfesor();
@@ -66,14 +72,14 @@ public class App {
 
     public static int menuEstudiantes(){
         Scanner sca=new Scanner(System.in);
-        System.out.println("1.- Mostrar     2.-Capturar     3.Editar     4.-Borrar    0.-Salir");
+        System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
         int op=10+ sca.nextInt();
         return op;
     }
 
     public static int menuProfesores(){
         Scanner sca=new Scanner(System.in);
-        System.out.println("1.- Mostrar     2.-Capturar     3.Editar     4.-Borrar    0.-Salir");
+        System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
         int op=20+ sca.nextInt();
         return op;
     }
