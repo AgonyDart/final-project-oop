@@ -14,6 +14,7 @@ public class Escuelota {
     private String web;
     private Persona personas[] = new Persona[1000];
     private Persona personascopy[]= new Persona[100];
+    private Grupo grupos[] = new Grupo[10]
     private int cPersons; 
     private int cEstudiantes;             //los ocupo para el borrar :)
     private int cProfesores;              //los ocupo para el borrar :)
@@ -227,6 +228,40 @@ public class Escuelota {
         System.arraycopy(personascopy, 0, personas, 0, cPersons);
         System.out.println("Eliminado, NO OLVIDES GUARDAR LOS CAMBIOS");
     }
+    //Grupo
+    public void capturarGrupo(){
+        grupos[cGrupos]= new Grupo();
+        grupos[cGrupos].capturar();
+        cGrupos++;
+	}
+	
+	public void mostrarGrupos(){
+        int cont=0;
+        for(int i=0;i<cGrupos;i++){
+                grupos[i].mostrar();
+                cont++;
+		}
+	}
+    
+    public void buscarEstudiantesG(){
+        Scanner con=new Scanner(System.in);
+        System.out.println("Ingrese grupo a buscar");
+        String cadena = con.nextLine();
+        cadena = cadena.toLowerCase();
+        String megacadena;
+        for(int i=0;i<cPersons;i++){
+            Estudiante e;
+            if(personas[i].queSoy().equals("Estudiante"))
+                e=(Estudiante)personas[i];
+            else
+                continue;
+            megacadena=e.getGrupo();
+            megacadena=megacadena.toLowerCase();
+            if(megacadena.contains(cadena))
+                System.out.println(personas[i].getNombre()+" >> grupo :"+personas[i].getGrupo());
+            megacadena="";
+        }
+	}
 
     //encapsulamiento
     public String getNombre() {
