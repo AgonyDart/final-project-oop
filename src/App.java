@@ -42,6 +42,13 @@ public class App {
                 case 24:
                     escuelota.borrarProfesor();
                     break;
+                case 31:
+                    escuelota.mostrarGrupo();
+                    break;
+                case 32:
+                    escuelota.capturarGrupo();
+                    break;
+                case 33
             }
         }while(ciclo);
     }
@@ -60,6 +67,7 @@ public class App {
                 opcion=menuProfesores();
                 break;
             case 3:
+                opcion=menuGrupo();
                 break;
             case 4:
                 opcion=4;
@@ -81,6 +89,12 @@ public class App {
         Scanner sca=new Scanner(System.in);
         System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
         int op=20+ sca.nextInt();
+        return op;
+    }
+    public static int menuGrupo(){
+        Scanner sca=new Scanner(System.in);
+        System.out.println("1.- Mostrar     2.-Capturar     3.-Lista de Estudiantes   0.-Salir");
+        int op=30+ sca.nextInt();
         return op;
     }
 }
