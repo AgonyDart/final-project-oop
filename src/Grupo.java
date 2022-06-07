@@ -36,15 +36,15 @@ public class Grupo implements Interfaz{
   
   }
   // public void mostrarEstudiantes(String string) {//segun yo si jala pero no lo probe
-  //   String textForSearching;
+  //   String grupo;
   //   for (int i = 0; i < cPersonas; i++) {
-  //     if (personas[i] != null && personas[i].whatI().equals("Estudiante")) {
+  //     if (personas[i] != null && personas[i].queSoy().equals("Estudiante")) {
   //       Estudiante e = (Estudiante) personas[i];
-  //       textForSearching = e.getGrupo();
-  //       if (textForSearching.contains(string)) {
+  //       grupo = e.getGrupo();
+  //       if (grupo.contains(string)) {
   //           System.out.println(e.getNoControl+e.getGrupo);
   //       }
-  //       textForSearching = "";
+  //       grupo = "";
   //     }
   //   }
   // }
