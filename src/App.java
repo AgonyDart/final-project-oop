@@ -37,7 +37,7 @@ public class App {
                 escuelota.mostrarNombrePeriodos();
                 System.out.println("\n\t\t0.- Salir");
                 System.out.print(" << :");
-                periodo = scanner.nextInt() - 1;
+                periodo = scanner.nextInt()-1;
                 if (periodo == -1) {
                     break;
                 }
@@ -52,6 +52,8 @@ public class App {
                     if (grupo == -1) {
                         break;
                     }
+                    escuelota.mostrarProfesoresGrupo(grupo-1, periodo);
+                    
                 } while (grupo != 0);
            } while(periodo != 0);
         } catch (Exception e) {

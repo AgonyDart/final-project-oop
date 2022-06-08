@@ -89,9 +89,9 @@ public class Escuela {
     // Periodos
     public void cargarInfo() {
         grupos[0] = new Grupo(1001, "K6", "1A", "101", "LE007");
-        grupos[1] = new Grupo(1001, "F6", "2B", "102", "LE007");
-        grupos[2] = new Grupo(1001, "F2", "3C", "103", "LE007");
-        grupos[3] = new Grupo(1002, "I3", "1B", "201", "LE007");
+        grupos[1] = new Grupo(1001, "F6", "2B", "102", "SA006");
+        grupos[2] = new Grupo(1001, "F2", "3C", "103", "EM037");
+        grupos[3] = new Grupo(1002, "I3", "1B", "201", "RA007");
         grupos[4] = new Grupo(1002, "J21", "2C", "202", "LE007");
         grupos[5] = new Grupo(1002, "P5", "3A", "203", "LE007");
         grupos[6] = new Grupo(1003, "M8", "1C", "301", "LE007");
@@ -282,6 +282,7 @@ public class Escuela {
         }
     }
 
+
     public int[] indexProfesores(){
         int indexProfesores[] =new int[cProfesores+1];
         int cont =0;
@@ -386,6 +387,48 @@ public class Escuela {
             }
         }
 	}
+
+    public void mostrarProfesoresGrupo(int index, int idPeriodo){
+        Scanner con=new Scanner(System.in);
+        int index1[] = indexGrupos(idPeriodo);
+        int index2 = index1[index];
+        String refProfesor = grupos[index2].getRefProfesor();
+        refProfesor = refProfesor.toLowerCase();
+        int cont=0;
+        System.out.println("hola"+ index2);
+        for(int i=0;i<cPersons;i++){
+            Profesor e;
+            if(personas[i].queSoy().equals("Profesor")){
+                e=(Profesor)personas[i];
+                String noSS=e.getNoSS().toLowerCase();
+                if(noSS.equals(refProfesor)){
+                    System.out.println((cont+1)+ ".- "+e.getAsignatura());
+                    cont++;
+                }
+            }
+        }
+    }
+
+    public int[] indexGrupos(int idPeriodo){
+        int index = 0;
+        int indexGrupos[] =new int[cGrupos+1];
+        for (int i = 0; i < cGrupos; i++) {
+            if (grupos[i].getIdPeriodo() == idPeriodo) {
+                indexGrupos[index]=i;
+                index++;
+            }
+        }
+        return indexGrupos;
+	}
+    // int indexProfesores[] =new int[cProfesores+1];
+    //     int cont =0;
+    //     for(int i=0;i<cPersons;i++){
+    //         if(personas[i].queSoy().equalsIgnoreCase("Profesor")){
+    //             indexProfesores[cont]=i;
+    //             cont++;
+    //         }
+    //     }
+    //     return indexProfesores;
 
     //encapsulamiento
     public String getNombre() {
