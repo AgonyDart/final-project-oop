@@ -9,11 +9,13 @@ public class Escuela {
     private Persona personascopy[]= new Persona[100];
     private Grupo grupos[] = new Grupo[10];
     private Periodo periodos[] = new Periodo[100];
+    private Calificacion calificaciones[] = new Calificacion[1000];
     private int cPersons;
     private int cEstudiantes;             //los ocupo para el borrar :)
     private int cProfesores;              //los ocupo para el borrar :)
     private int cGrupos;              //los ocupo para el borrar :)
     private int cPeriodos;              //los ocupo para el borrar :)
+    private int cCalif;              //los ocupo para el borrar :)
 
     Scanner con=new Scanner(System.in);
     public Escuela(){}
@@ -110,7 +112,14 @@ public class Escuela {
         personas[7] = new Profesor("Miguel A.", "44318232334", "MI007", "2A", "rfc", "1234 5678", "Maestria", "Geografia");
         personas[8] = new Profesor("Carlos H.", "44318232334", "CA127", "3B", "rfc", "1234 5678", "Licenciatura", "Historia");
 
-        cPersons = 8;
+        personas[9] = new Estudiante("Estudiante 1", "4437778899", "ES001", "1A", "TIDA031201HMNNRNA0", "m", true);
+        personas[10] = new Estudiante("Estudiante 2", "4437778899", "ES002", "1A", "TIDA031201HMNNRNA0", "m", true);
+        personas[11] = new Estudiante("Estudiante 3", "4437778899", "ES003", "1A", "TIDA031201HMNNRNA0", "m", true);
+        personas[12] = new Estudiante("Estudiante 4", "4437778899", "ES004", "2A", "TIDA031201HMNNRNA0", "m", true);
+        personas[13] = new Estudiante("Estudiante 5", "4437778899", "ES005", "2A", "TIDA031201HMNNRNA0", "m", true);
+        cPersons = 13;
+
+
 
     }
 
@@ -189,13 +198,32 @@ public class Escuela {
                 c++;
             }
         }
-        System.out.println(cEstudiantes);
         System.out.println(" >> Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0");
         int opcion = con.nextInt() - 1;
         if(opcion!=-1){
             personas[indexEstudiantes[opcion]].mostrar();
         }
+    }
 
+    public void mostrarEstudiantes(int grupo){
+        // System.out.println(grupo);
+        System.out.println(" = = = = = = = =");
+        Scanner con = new Scanner(System.in);
+        int c = 0;
+        int indexEstudiantes[] = indexEstudiantes();
+        for(int i = 0; i < cPersons; i++){
+            if(personas[i].queSoy().equalsIgnoreCase("Estudiante")){
+                System.out.println((c + 1) + ".- " + personas[i].getNombre());
+                c++;
+            }
+        }
+        // System.out.println(cEstudiantes);
+        System.out.println(" = = = = = = = =");
+        System.out.print(" >> Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0\n\n << :");
+        int opcion = con.nextInt() - 1;
+        if(opcion!=-1){
+            personas[indexEstudiantes[opcion]].mostrar();
+        }
     }
 
     public void capturarEstudiante(){
@@ -389,20 +417,20 @@ public class Escuela {
 	}
 
     public void mostrarProfesoresGrupo(int index, int idPeriodo){
-        Scanner con=new Scanner(System.in);
+        Scanner con = new Scanner(System.in);
         int index1[] = indexGrupos(idPeriodo);
         int index2 = index1[index];
         String refProfesor = grupos[index2].getRefProfesor();
         refProfesor = refProfesor.toLowerCase();
         int cont=0;
-        System.out.println("hola"+ index2);
+        // System.out.println("hola"+ index2);
         for(int i=0;i<cPersons;i++){
             Profesor e;
             if(personas[i].queSoy().equals("Profesor")){
                 e=(Profesor)personas[i];
                 String noSS=e.getNoSS().toLowerCase();
                 if(noSS.equals(refProfesor)){
-                    System.out.println((cont+1)+ ".- "+e.getAsignatura());
+                    System.out.println("\t" + (cont+1)+ ".- "+e.getAsignatura() + "\t->" + e.getNombre());
                     cont++;
                 }
             }
@@ -429,6 +457,23 @@ public class Escuela {
     //         }
     //     }
     //     return indexProfesores;
+
+    // Calificaciones
+    public void guardarCalificaciones(){
+
+    }
+
+    public void cargarCalificaciones() {
+        
+    }
+
+    public void mostrarCalificaciones() {
+        
+    }
+
+    public void capturarCalificaciones(){
+
+    }
 
     //encapsulamiento
     public String getNombre() {

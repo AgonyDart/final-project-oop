@@ -9,12 +9,11 @@ public class Estudiante extends Persona{
 
     public Estudiante(){}
 
-    public Estudiante(String nombre, String telefono, String noSS, String grupo, String noControl, String genero, boolean estado, Materia[] materias) {
+    public Estudiante(String nombre, String telefono, String noSS, String grupo, String noControl, String genero, boolean estado) {
         super(nombre, telefono, noSS, grupo);
         this.noControl = noControl;
         this.genero = genero;
         this.estado = estado;
-        this.materias = materias;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class Estudiante extends Persona{
         System.out.println("\n( >> >> Capturar Estudiante << << )");
         super.capturar();
         noControl= "2112"+ nombre.substring(0,1);
-        System.out.print(">> Genero         :" ); 
+        System.out.print(">> Genero         :" );
         genero=con.nextLine();
         estado=true;
 

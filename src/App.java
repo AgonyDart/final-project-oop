@@ -16,6 +16,7 @@ public class App {
         try {
             int periodo;
             int grupo;
+            int asignatura;
             do {
                 System.out.println(" = = = = Hola, por favor inicia sesion = = = = = = = =");
                 System.out.print(" >> Usuario        : ");
@@ -46,14 +47,50 @@ public class App {
                     System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
                     System.out.println("\n >> Por favor selecciona el grupo en el que quieres trabajar:");
                     escuelota.mostrarGrupos(periodo);
-                    System.out.println("\n\t\t0.- Salir");
+                    System.out.println("\n\t0.- Salir");
                     System.out.print(" << :");
                     grupo = scanner.nextInt();
                     if (grupo == -1) {
                         break;
                     }
+                    System.out.println("\n >> Por favor selecciona la materia para registrar calificaciones:");
                     escuelota.mostrarProfesoresGrupo(grupo-1, periodo);
-                    
+                    System.out.println("\n\t0.- Salir");
+                    System.out.print(" << :");
+                    asignatura = scanner.nextInt();
+                    if (asignatura == 0) {
+                        break;
+                    }
+                    do {
+                        op = mostrarMenu();
+                        switch(op) {
+                            case 0:
+                                ciclo = false;
+                                break;
+                            case 3:
+                                escuelota.guardarDatos();
+                                System.out.println(" >> Guardado []");
+                                break;
+                            case 11:
+                                escuelota.mostrarEstudiantes(grupo);
+                                break;
+                            case 12:
+                                escuelota.capturarEstudiante();
+                                break;
+                            case 13:
+                                escuelota.buscarEstudiantes();
+                                break;
+                            case 14:
+                                escuelota.borrarEstudiante();
+                                break;
+                            case 21:
+                                escuelota.mostrarCalificaciones();
+                                break;
+                            case 22:
+                                escuelota.capturarCalificaciones();
+                                break;
+                        }
+                    } while (op != 0);
                 } while (grupo != 0);
            } while(periodo != 0);
         } catch (Exception e) {
@@ -63,7 +100,7 @@ public class App {
 
     public static int mostrarMenu() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("1.- Estudiantes\n2.- Profesores\n3.- Grupos\n4.- Guardar datos\n0.- Salir\n\n >> :");
+        System.out.print("\n1.- Estudiantes\t\t2.- Calificaciones\t\t3.- Guardar datos\t\t0.- Salir\n\n << :");
         int op = scanner.nextInt();
         int opcion = 0;
         switch (op) {
@@ -71,13 +108,10 @@ public class App {
                 opcion = menuEstudiantes();
                 break;
             case 2:
-                opcion = menuProfesores();
+                opcion = menuCalificaciones();
                 break;
             case 3:
-                opcion = menuGrupo();
-                break;
-            case 4:
-                opcion = 4;
+                opcion = 3;
                 break;
             case 0:
                 break;
@@ -87,22 +121,30 @@ public class App {
 
     public static int menuEstudiantes() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
+        System.out.print("\n1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir\n\n << :");
         int op = 10 + scanner.nextInt();
         return op;
     }
 
-    public static int menuProfesores() {
+    public static int menuCalificaciones() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
+        System.out.println("\n1.- Mostrar     2.-Capturar    0.-Salir");
         int op = 20 + scanner.nextInt();
         return op;
     }
 
-    public static int menuGrupo() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("1.- Mostrar     2.-Capturar     3.-Lista de Estudiantes   0.-Salir");
-        int op = 30 + scanner.nextInt();
-        return op;
-    }
+    // Metodos para la vercion anterior
+    // public static int menuProfesores() {
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
+    //     int op = 20 + scanner.nextInt();
+    //     return op;
+    // }
+
+    // public static int menuGrupo() {
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.println("1.- Mostrar     2.-Capturar     3.-Lista de Estudiantes   0.-Salir");
+    //     int op = 30 + scanner.nextInt();
+    //     return op;
+    // }
 }
