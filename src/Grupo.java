@@ -4,6 +4,7 @@ public class Grupo implements Interfaz{
     private String refProfesor;
     private String refSalon;
     private String nombre;
+    private String idGrupo;
 
     public Grupo(){}
 
@@ -14,9 +15,9 @@ public class Grupo implements Interfaz{
     }
 
     public void mostrar() {
-      System.out.println(">> Nombre  :"+nombre);
-      System.out.println(">> Profesor :"+refProfesor); 
-      System.out.println(">> Salon    :"+refSalon);
+      System.out.println(">> Nombre     :"+nombre);
+      System.out.println(">> Profesor   :"+refProfesor);
+      System.out.println(">> Salon      :"+refSalon);
     }
 
     public void capturar() {

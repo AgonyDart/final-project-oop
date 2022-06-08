@@ -25,10 +25,20 @@ public class Escuela {
     }
 
     //metodos
-    public void loadData(){
+    public void cargarDatos(){
+        cargarPersonas();
+        cargarPeriodos();
+    }
+
+    public void guardarDatos(){
+        guardarPersonas();
+        guardarPeriodos();
+    }
+
+
+    public void cargarPersonas(){
         FileInputStream fe=null;
         cPersons=0;
-        cPeriodos = 0;
         try{
             fe=new FileInputStream("data.dat");
             ObjectInputStream fObj=new ObjectInputStream(fe);
@@ -54,22 +64,20 @@ public class Escuela {
         }
     }
 
-    public void saveData(){
+    public void guardarPersonas(){
         FileOutputStream fs=null;
         try{
             fs=new FileOutputStream("data.dat");
             ObjectOutputStream fObj=new ObjectOutputStream(fs);
-            // for(int i=0;i<cPersons;i++){
-            //     fObj.writeObject(personas[i]);
-            //     if(personas[i].queSoy().equals("Estudiante"))
-            //         cEstudiantes++;
-            //     if(personas[i].queSoy().equals("Profesor"))
-            //         cProfesores++;
-            // }
-            for (Periodo p : periodos) {
-                fObj.writeObject(p);
+            for(int i=0;i<cPersons;i++){
+                fObj.writeObject(personas[i]);
+                if(personas[i].queSoy().equals("Estudiante"))
+                    cEstudiantes++;
+                if(personas[i].queSoy().equals("Profesor"))
+                    cProfesores++;
             }
             fs.close();
+            System.out.println(" >> Guardando...");
         }
         catch(Exception e){
             System.out.println(e);
@@ -77,11 +85,47 @@ public class Escuela {
     }
 
     // Periodos
+    public void cargarInfo() {
+        personas[1] = new Profesor("Leonardo G.", "44318232334", "LE007", "1A", "rfc", "1234 5678", "Licenciatura", "Matematicas");
+        personas[2] = new Profesor("Samar S.", "44318232334", "SA006", "2B", "rfc", "1234 5678", "Doctorado", "Quimica");
+        personas[3] = new Profesor("Emir", "44318232334", "EM037", "3C", "rfc", "1234 5678", "Maestria", "Literatura");
+        personas[4] = new Profesor("Ramiro T.", "44318232334", "RA007", "1B", "rfc", "1234 5678", "Postgrado", "Programacion");
+        personas[5] = new Profesor("Perla D.", "44318232334", "PE032", "2C", "rfc", "1234 5678", "Licenciatura", "Biologia");
+        personas[6] = new Profesor("Fernando A.", "44318232334", "FE007", "3A", "rfc", "1234 5678", "Tecnico", "Fisica");
+        personas[7] = new Profesor("Julio C.", "44318232334", "JU003", "1A", "rfc", "1234 5678", "Licenciatura", "Ingles");
+        personas[8] = new Profesor("Miguel A.", "44318232334", "MI007", "1A", "rfc", "1234 5678", "Maestria", "Geografia");
+        personas[9] = new Profesor("Carlos H.", "44318232334", "CA127", "1A", "rfc", "1234 5678", "Licenciatura", "Historia");
+    }
+
     public void cargarPeriodos() {
-        periodos[0] = new Periodo("28 de Agosto del 2019", "16 de Junio del 2020", "AGO - JUN 19-20", 1001);
-        periodos[1] = new Periodo("28 de Agosto del 2020", "16 de Junio del 2021", "AGO - JUN 20-21", 1002);
-        periodos[2] = new Periodo("28 de Agosto del 2021", "16 de Junio del 2022", "AGO - JUN 21-22", 1003);
-        cPeriodos = 3;
+        cPeriodos = 0;
+        try {
+            FileInputStream fileIn = new FileInputStream("periodos.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            periodos[cPeriodos] = (Periodo) in.readObject();
+            while (periodos[cPeriodos]!=null) {
+                cPeriodos++;
+                periodos[cPeriodos] = (Periodo) in.readObject();
+            }
+            in.close();
+            fileIn.close();
+         } catch (Exception i) {
+            i.printStackTrace();
+         }
+    }
+
+    public void guardarPeriodos() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("periodos.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            for (Periodo p : periodos) {
+                out.writeObject(p);
+            }
+            out.close();
+            fileOut.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void mostrarNombrePeriodos(){
@@ -196,26 +240,6 @@ public class Escuela {
         }
     }
 
-    public void buscarProfesores(){
-        Scanner con=new Scanner(System.in);
-        System.out.println("Ingrese algun caracter a buscar");
-        String cadena = con.nextLine();
-        cadena = cadena.toLowerCase();
-        String megacadena;
-        for(int i=0;i<cPersons;i++){
-            Profesor e;
-            if(personas[i].queSoy().equals("Profesor"))
-                e=(Profesor)personas[i];
-            else
-                continue;
-            megacadena=e.getNombre()+e.getAsignatura()+e.getGradoEstudios()+e.getRfc();
-            megacadena=megacadena.toLowerCase();
-            if(megacadena.contains(cadena))
-                personas[i].mostrar();
-            megacadena="";
-        }
-    }
-
     //Profesores
     public void capturarProfesor(){
         personas[cPersons]= new Profesor();
@@ -230,7 +254,7 @@ public class Escuela {
         int indexProfesores[]=indexProfesores();
         for(int i=0;i<cPersons;i++){
             if(personas[i].queSoy().equalsIgnoreCase("Profesor")){
-                System.out.println((cont+1) + ".- "+personas[i].getNombre());
+                System.out.println("\t" + (cont+1) + ".- "+personas[i].getNombre());
                 cont++;
             }
         }
@@ -253,6 +277,26 @@ public class Escuela {
         return indexProfesores;
     }
 
+    public void buscarProfesores(){
+        Scanner con=new Scanner(System.in);
+        System.out.println("Ingrese algun caracter a buscar");
+        String cadena = con.nextLine();
+        cadena = cadena.toLowerCase();
+        String megacadena;
+        for(int i=0;i<cPersons;i++){
+            Profesor e;
+            if(personas[i].queSoy().equals("Profesor"))
+                e=(Profesor)personas[i];
+            else
+                continue;
+            megacadena=e.getNombre()+e.getAsignatura()+e.getGradoEstudios()+e.getRfc();
+            megacadena=megacadena.toLowerCase();
+            if(megacadena.contains(cadena))
+                personas[i].mostrar();
+            megacadena="";
+        }
+    }
+
     public void borrarProfesor(){
         Scanner con=new Scanner(System.in);
         int cont=0;
@@ -272,6 +316,7 @@ public class Escuela {
         System.arraycopy(personascopy, 0, personas, 0, cPersons);
         System.out.println("Eliminado, NO OLVIDES GUARDAR LOS CAMBIOS");
     }
+
     //Grupo
     public void capturarGrupo(){
         grupos[cGrupos]= new Grupo();

@@ -5,7 +5,7 @@ public class App {
         boolean ciclo = true;
         Escuela escuelota = new Escuela("ITM", "Yo mero", "www.tec.com");
         int op = 1;
-        escuelota.loadData();
+        escuelota.cargarDatos();
         Scanner scanner = new Scanner(System.in);
 
         // Inicio del sistema
@@ -13,6 +13,8 @@ public class App {
 
         // Inicio del bucle
         try {
+            int periodo;
+            int maestro;
             do {
                 System.out.println(" = = = = Hola, por favor inicia sesion = = = = = = = =");
                 System.out.print(" >> Usuario        : ");
@@ -28,58 +30,26 @@ public class App {
             do {
                 // Seleccion periodo
                 System.out.println("\n >> Por favor selecciona el periodo en el que quieres trabajar:");
-                // escuelota.cargarPeriodos();
                 escuelota.mostrarNombrePeriodos();
                 System.out.println("\n\t\t0.- Salir");
                 System.out.print(" << :");
-                int periodo = scanner.nextInt() - 1;
+                periodo = scanner.nextInt() - 1;
                 if (periodo == -1) {
                     break;
                 }
                 periodo = escuelota.getPeriodoId(periodo);
-                System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
-                op = mostrarMenu();
-                switch(op) {
-                    case 0:
-                        ciclo = false;
+                do {
+                    System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
+                    System.out.println("\n >> Por favor selecciona el profesor en el que quieres trabajar:");
+                    escuelota.mostrarProfesores();
+                    System.out.println("\n\t\t0.- Salir");
+                    System.out.print(" << :");
+                    maestro = scanner.nextInt() - 1;
+                    if (maestro == -1) {
                         break;
-                    case 4:
-                        escuelota.saveData();
-                        System.out.println(" >> Guardando...\n >> Guardado []");
-                        break;
-                    case 11:
-                        escuelota.mostrarEstudiantes();
-                        break;
-                    case 12:
-                        escuelota.capturarEstudiante();
-                        break;
-                    case 13:
-                        escuelota.buscarEstudiantes();
-                        break;
-                    case 14:
-                        escuelota.borrarEstudiante();
-                        break;
-                    case 21:
-                        escuelota.mostrarProfesores();
-                        break;
-                    case 22:
-                        escuelota.capturarProfesor();
-                        break;
-                    case 23:
-                        escuelota.buscarProfesores();
-                        break;
-                    case 24:
-                        escuelota.borrarProfesor();
-                        break;
-                    // case 31:
-                    //     escuelota.mostrarGrupo();
-                    //     break;
-                    // case 32:
-                    //     escuelota.capturarGrupo();
-                    //     break;
-                    // case 33
-                }
-            } while (ciclo);
+                    }
+                } while (maestro != 0);
+           } while(periodo != 0);
         } catch (Exception e) {
             System.out.println(e);
         }
