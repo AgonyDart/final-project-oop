@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class Grupo implements Interfaz, java.io.Serializable {
+public class Grupo implements Interfaz, Serializable {
     private int idPeriodo;
     private String refSalon;
     private String nombre;
     private String idGrupo;
     private String refProfesor;
+    private String[] refprofesor1 = new String[6];
 
     public Grupo(){}
 
@@ -16,6 +17,18 @@ public class Grupo implements Interfaz, java.io.Serializable {
         this.nombre = nombre;
         this.idGrupo = idGrupo;
         this.refProfesor = refProfesor;
+    }
+    public Grupo(int idPeriodo, String refSalon, String nombre, String idGrupo,String refProfesor,String refProfesor2,String refProfesor3,String refProfesor4,String refProfesor5,String refProfesor6) {
+        this.idPeriodo = idPeriodo;
+        this.refSalon = refSalon;
+        this.nombre = nombre;
+        this.idGrupo = idGrupo;
+        this.refprofesor1[0] = refProfesor;
+        this.refprofesor1[1] = refProfesor2;
+        this.refprofesor1[2] = refProfesor3;
+        this.refprofesor1[3] = refProfesor4;
+        this.refprofesor1[4] = refProfesor5;
+        this.refprofesor1[5] = refProfesor6;
     }
 
     public void mostrar() {
@@ -70,5 +83,12 @@ public class Grupo implements Interfaz, java.io.Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public String[] getRefProfesor1() {
+        return refprofesor1;
+    }
+
+    public void setRefProfesor1(String[] refprofesor1) {
+        this.refprofesor1 = refprofesor1;
     }
 }

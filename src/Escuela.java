@@ -88,15 +88,15 @@ public class Escuela {
 
     // Periodos
     public void cargarInfo() {
-        grupos[0] = new Grupo(1001, "K6", "1A", "101", "LE007");
-        grupos[1] = new Grupo(1001, "F6", "2B", "102", "SA006");
-        grupos[2] = new Grupo(1001, "F2", "3C", "103", "EM037");
-        grupos[3] = new Grupo(1002, "I3", "1B", "201", "RA007");
-        grupos[4] = new Grupo(1002, "J21", "2C", "202", "LE007");
-        grupos[5] = new Grupo(1002, "P5", "3A", "203", "LE007");
-        grupos[6] = new Grupo(1003, "M8", "1C", "301", "LE007");
-        grupos[7] = new Grupo(1003, "T1", "2A", "302", "LE007");
-        grupos[8] = new Grupo(1003, "L7", "3B", "303", "LE007");
+        grupos[0] = new Grupo(1001, "K6", "1A", "101", "LE007","SA006","RA007","PE032","FE007","JU003");
+        grupos[1] = new Grupo(1001, "F6", "2B", "102", "SA006","SA006","SA006","SA006","SA006","SA006");
+        grupos[2] = new Grupo(1001, "F2", "3C", "103", "EM037","SA006","SA006","SA006","SA006","SA006");
+        grupos[3] = new Grupo(1002, "I3", "1B", "201", "RA007","SA006","SA006","SA006","SA006","SA006");
+        grupos[4] = new Grupo(1002, "J21", "2C", "202", "LE007","SA006","SA006","SA006","SA006","SA006");
+        grupos[5] = new Grupo(1002, "P5", "3A", "203", "LE007","SA006","SA006","SA006","SA006","SA006");
+        grupos[6] = new Grupo(1003, "M8", "1C", "301", "LE007","SA006","SA006","SA006","SA006","SA006");
+        grupos[7] = new Grupo(1003, "T1", "2A", "302", "LE007","SA006","SA006","SA006","SA006","SA006");
+        grupos[8] = new Grupo(1003, "L7", "3B", "303", "LE007","SA006","SA006","SA006","SA006","SA006");
 
         cGrupos = 8;
 
@@ -392,19 +392,19 @@ public class Escuela {
         Scanner con=new Scanner(System.in);
         int index1[] = indexGrupos(idPeriodo);
         int index2 = index1[index];
-        String refProfesor = grupos[index2].getRefProfesor();
-        refProfesor = refProfesor.toLowerCase();
+        String[] refProfesor = grupos[index2].getRefProfesor1();
         int cont=0;
-        System.out.println("hola"+ index2);
         for(int i=0;i<cPersons;i++){
             Profesor e;
             if(personas[i].queSoy().equals("Profesor")){
                 e=(Profesor)personas[i];
                 String noSS=e.getNoSS().toLowerCase();
-                if(noSS.equals(refProfesor)){
+                for(int k=0;k<5;k++){
+                    if(noSS.equals(refProfesor[k].toLowerCase())){
                     System.out.println((cont+1)+ ".- "+e.getAsignatura());
                     cont++;
                 }
+            }
             }
         }
     }
@@ -420,15 +420,6 @@ public class Escuela {
         }
         return indexGrupos;
 	}
-    // int indexProfesores[] =new int[cProfesores+1];
-    //     int cont =0;
-    //     for(int i=0;i<cPersons;i++){
-    //         if(personas[i].queSoy().equalsIgnoreCase("Profesor")){
-    //             indexProfesores[cont]=i;
-    //             cont++;
-    //         }
-    //     }
-    //     return indexProfesores;
 
     //encapsulamiento
     public String getNombre() {
