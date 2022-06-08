@@ -33,12 +33,14 @@ public class Escuela {
         cargarPersonas();
         cargarPeriodos();
         cargarGrupos();
+        cargarCalificaciones();
     }
 
     public void guardarDatos() {
         guardarPersonas();
         guardarPeriodos();
         guardarGrupos();
+        guardarCalificaciones();
     }
 
     public void cargarPersonas() {
@@ -459,19 +461,14 @@ public class Escuela {
 
     // Calificaciones
     public void guardarCalificaciones() {
-        FileOutputStream fs = null;
         try {
-            fs = new FileOutputStream("data.dat");
-            ObjectOutputStream fObj = new ObjectOutputStream(fs);
-            for (int i = 0; i < cCalif; i++) {
-                fObj.writeObject(personas[i]);
-                if (personas[i].queSoy().equals("Estudiante"))
-                    cEstudiantes++;
-                if (personas[i].queSoy().equals("Profesor"))
-                    cProfesores++;
+            FileOutputStream fileOut = new FileOutputStream("calificaciones.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            for (Calificacion c : calificaciones) {
+                out.writeObject(c);
             }
-            fs.close();
-            System.out.println(" >> Guardando...");
+            out.close();
+            fileOut.close();
         } catch (Exception e) {
             System.out.println(e);
         }
