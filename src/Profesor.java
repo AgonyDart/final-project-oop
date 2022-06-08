@@ -1,5 +1,3 @@
-package src;
-
 import java.util.Scanner;
 
 public class Profesor extends Persona {

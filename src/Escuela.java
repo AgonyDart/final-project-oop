@@ -1,28 +1,24 @@
-package src;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
-import javax.lang.model.util.ElementScanner14;
-
-import java.util.Arrays;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-public class Escuelota {
+public class Escuela {
     private String nombre;
     private String director;
     private String web;
     private Persona personas[] = new Persona[1000];
     private Persona personascopy[]= new Persona[100];
-    private Grupo grupos[] = new Grupo[10]
-    private int cPersons; 
+    private Grupo grupos[] = new Grupo[10];
+    private Periodo periodos[] = new Periodo[100];
+    private int cPersons;
     private int cEstudiantes;             //los ocupo para el borrar :)
     private int cProfesores;              //los ocupo para el borrar :)
-    
-    Scanner con=new Scanner(System.in);
-    public Escuelota(){}
+    private int cGrupos;              //los ocupo para el borrar :)
+    private int cPeriodos;              //los ocupo para el borrar :)
 
-    public Escuelota(String nombre, String director, String web) {
+    Scanner con=new Scanner(System.in);
+    public Escuela(){}
+
+    public Escuela(String nombre, String director, String web) {
         this.nombre = nombre;
         this.director = director;
         this.web = web;
@@ -32,6 +28,7 @@ public class Escuelota {
     public void loadData(){
         FileInputStream fe=null;
         cPersons=0;
+        cPeriodos = 0;
         try{
             fe=new FileInputStream("data.dat");
             ObjectInputStream fObj=new ObjectInputStream(fe);
@@ -45,50 +42,97 @@ public class Escuelota {
                     cProfesores++;
 
             }
+            periodos[cPeriodos]=(Periodo)fObj.readObject();
+            while (periodos[cPeriodos] != null) {
+                cPeriodos++;
+                periodos[cPeriodos] = (Periodo)fObj.readObject();
+            }
             fe.close();
         }
         catch(Exception e){
-            System.out.println("Datos cargados");
+            System.out.println(" (Datos cargados: [100%])");
         }
     }
-    
+
     public void saveData(){
         FileOutputStream fs=null;
-
         try{
             fs=new FileOutputStream("data.dat");
             ObjectOutputStream fObj=new ObjectOutputStream(fs);
-            for(int i=0;i<cPersons;i++){
-                fObj.writeObject(personas[i]);
-                if(personas[i].queSoy().equals("Estudiante"))
-                    cEstudiantes++;
-                if(personas[i].queSoy().equals("Profesor"))
-                    cProfesores++;
+            // for(int i=0;i<cPersons;i++){
+            //     fObj.writeObject(personas[i]);
+            //     if(personas[i].queSoy().equals("Estudiante"))
+            //         cEstudiantes++;
+            //     if(personas[i].queSoy().equals("Profesor"))
+            //         cProfesores++;
+            // }
+            for (Periodo p : periodos) {
+                fObj.writeObject(p);
             }
             fs.close();
-            
         }
         catch(Exception e){
             System.out.println(e);
         }
     }
 
+    // Periodos
+    public void cargarPeriodos() {
+        periodos[0] = new Periodo("28 de Agosto del 2019", "16 de Junio del 2020", "AGO - JUN 19-20", 1001);
+        periodos[1] = new Periodo("28 de Agosto del 2020", "16 de Junio del 2021", "AGO - JUN 20-21", 1002);
+        periodos[2] = new Periodo("28 de Agosto del 2021", "16 de Junio del 2022", "AGO - JUN 21-22", 1003);
+        cPeriodos = 3;
+    }
+
+    public void mostrarNombrePeriodos(){
+        for (int i = 0; i < cPeriodos && periodos[i] != null; i++) {
+            System.out.println("\t\t" + (i + 1) + ".- " + periodos[i].getNombre());
+        }
+    }
+
+    public void mostrarPeriodo(){
+        for (int i = 0; i < cPeriodos; i++) {
+            periodos[i].mostrar();
+        }
+    }
+
+    public void capturarPeriodo(){
+        periodos[cPeriodos]= new Periodo();
+        periodos[cPeriodos].capturar();
+        cPeriodos++;
+    }
+
+    public int getPeriodoId(int index) {
+        return periodos[index].getIdPeriodo();
+    }
+
+    public String getPeriodoNombre(int id) {
+        for(int i = 0; i <= cPeriodos && periodos[i] != null; i++){
+            String indexer = String.valueOf(periodos[i].getIdPeriodo());
+            if(indexer.contains(String.valueOf(id))) {
+                return periodos[i].getNombre();
+            }
+            indexer = "";
+        }
+        return null;
+    }
+
     //Estudiantes
     public void mostrarEstudiantes(){
-        Scanner con=new Scanner(System.in);
-        int cont=0;
-        int indexEstudiantes[]=indexEstudiantes();
-        for(int i=0;i<cPersons;i++){
+        Scanner con = new Scanner(System.in);
+        int c = 0;
+        int indexEstudiantes[] = indexEstudiantes();
+        for(int i = 0; i < cPersons; i++){
             if(personas[i].queSoy().equalsIgnoreCase("Estudiante")){
-                System.out.println((cont+1) + ".- "+personas[i].getNombre());
-                cont++;
+                System.out.println((c + 1) + ".- " + personas[i].getNombre());
+                c++;
             }
         }
         System.out.println(cEstudiantes);
-        System.out.println("Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0");
-        int opcio=con.nextInt()-1;
-        if(opcio!=-1){
-            personas[indexEstudiantes[opcio]].mostrar();
+        System.out.println(" >> Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0");
+        int opcion = con.nextInt() - 1;
+        if(opcion!=-1){
+            personas[indexEstudiantes[opcion]].mostrar();
         }
 
     }
@@ -171,8 +215,8 @@ public class Escuelota {
             megacadena="";
         }
     }
-    
-    //Profesores 
+
+    //Profesores
     public void capturarProfesor(){
         personas[cPersons]= new Profesor();
         personas[cPersons].capturar();
@@ -234,12 +278,12 @@ public class Escuelota {
         grupos[cGrupos].capturar();
         cGrupos++;
 	}
-	
+
 	public void mostrarGrupos(){
         for(int i=0;i<cGrupos;i++)
                 grupos[i].mostrar();
 	}
-    
+
     public void buscarEstudiantesG(){
         Scanner con=new Scanner(System.in);
         System.out.println("Ingrese grupo a buscar");
@@ -283,5 +327,9 @@ public class Escuelota {
 
     public void setWeb(String web) {
         this.web = web;
+    }
+
+    public int getcPeriodos(){
+        return cPeriodos;
     }
 }
