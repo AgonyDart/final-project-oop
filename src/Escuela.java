@@ -28,11 +28,13 @@ public class Escuela {
     public void cargarDatos(){
         cargarPersonas();
         cargarPeriodos();
+        cargarGrupos();
     }
 
     public void guardarDatos(){
         guardarPersonas();
         guardarPeriodos();
+        guardarGrupos();
     }
 
 
@@ -86,15 +88,30 @@ public class Escuela {
 
     // Periodos
     public void cargarInfo() {
-        personas[1] = new Profesor("Leonardo G.", "44318232334", "LE007", "1A", "rfc", "1234 5678", "Licenciatura", "Matematicas");
-        personas[2] = new Profesor("Samar S.", "44318232334", "SA006", "2B", "rfc", "1234 5678", "Doctorado", "Quimica");
-        personas[3] = new Profesor("Emir", "44318232334", "EM037", "3C", "rfc", "1234 5678", "Maestria", "Literatura");
-        personas[4] = new Profesor("Ramiro T.", "44318232334", "RA007", "1B", "rfc", "1234 5678", "Postgrado", "Programacion");
-        personas[5] = new Profesor("Perla D.", "44318232334", "PE032", "2C", "rfc", "1234 5678", "Licenciatura", "Biologia");
-        personas[6] = new Profesor("Fernando A.", "44318232334", "FE007", "3A", "rfc", "1234 5678", "Tecnico", "Fisica");
-        personas[7] = new Profesor("Julio C.", "44318232334", "JU003", "1A", "rfc", "1234 5678", "Licenciatura", "Ingles");
-        personas[8] = new Profesor("Miguel A.", "44318232334", "MI007", "1A", "rfc", "1234 5678", "Maestria", "Geografia");
-        personas[9] = new Profesor("Carlos H.", "44318232334", "CA127", "1A", "rfc", "1234 5678", "Licenciatura", "Historia");
+        grupos[0] = new Grupo(1001, "K6", "1A", "101", "LE007");
+        grupos[1] = new Grupo(1001, "F6", "2B", "102", "LE007");
+        grupos[2] = new Grupo(1001, "F2", "3C", "103", "LE007");
+        grupos[3] = new Grupo(1002, "I3", "1B", "201", "LE007");
+        grupos[4] = new Grupo(1002, "J21", "2C", "202", "LE007");
+        grupos[5] = new Grupo(1002, "P5", "3A", "203", "LE007");
+        grupos[6] = new Grupo(1003, "M8", "1C", "301", "LE007");
+        grupos[7] = new Grupo(1003, "T1", "2A", "302", "LE007");
+        grupos[8] = new Grupo(1003, "L7", "3B", "303", "LE007");
+
+        cGrupos = 8;
+
+        personas[0] = new Profesor("Leonardo G.", "44318232334", "LE007", "1A", "rfc", "1234 5678", "Licenciatura", "Matematicas");
+        personas[1] = new Profesor("Samar S.", "44318232334", "SA006", "2B", "rfc", "1234 5678", "Doctorado", "Quimica");
+        personas[2] = new Profesor("Emir", "44318232334", "EM037", "3C", "rfc", "1234 5678", "Maestria", "Literatura");
+        personas[3] = new Profesor("Ramiro T.", "44318232334", "RA007", "1B", "rfc", "1234 5678", "Postgrado", "Programacion");
+        personas[4] = new Profesor("Perla D.", "44318232334", "PE032", "2C", "rfc", "1234 5678", "Licenciatura", "Biologia");
+        personas[5] = new Profesor("Fernando A.", "44318232334", "FE007", "3A", "rfc", "1234 5678", "Tecnico", "Fisica");
+        personas[6] = new Profesor("Julio C.", "44318232334", "JU003", "1C", "rfc", "1234 5678", "Licenciatura", "Ingles");
+        personas[7] = new Profesor("Miguel A.", "44318232334", "MI007", "2A", "rfc", "1234 5678", "Maestria", "Geografia");
+        personas[8] = new Profesor("Carlos H.", "44318232334", "CA127", "3B", "rfc", "1234 5678", "Licenciatura", "Historia");
+
+        cPersons = 8;
+
     }
 
     public void cargarPeriodos() {
@@ -317,7 +334,38 @@ public class Escuela {
         System.out.println("Eliminado, NO OLVIDES GUARDAR LOS CAMBIOS");
     }
 
-    //Grupo
+    //Grupos
+    public void guardarGrupos(){
+        try {
+            FileOutputStream fileOut = new FileOutputStream("grupos.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            for (Grupo g : grupos) {
+                out.writeObject(g);
+            }
+            out.close();
+            fileOut.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void cargarGrupos(){
+        cGrupos = 0;
+        try {
+            FileInputStream fileIn = new FileInputStream("grupos.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            grupos[cGrupos] = (Grupo) in.readObject();
+            while (grupos[cGrupos]!=null) {
+                cGrupos++;
+                grupos[cGrupos] = (Grupo) in.readObject();
+            }
+            in.close();
+            fileIn.close();
+         } catch (Exception i) {
+            i.printStackTrace();
+         }
+    }
+
     public void capturarGrupo(){
         grupos[cGrupos]= new Grupo();
         grupos[cGrupos].capturar();
@@ -329,23 +377,13 @@ public class Escuela {
                 grupos[i].mostrar();
 	}
 
-    public void buscarEstudiantesG(){
-        Scanner con=new Scanner(System.in);
-        System.out.println("Ingrese grupo a buscar");
-        String cadena = con.nextLine();
-        cadena = cadena.toLowerCase();
-        String megacadena;
-        for(int i=0;i<cPersons;i++){
-            Estudiante e;
-            if(personas[i].queSoy().equals("Estudiante"))
-                e=(Estudiante)personas[i];
-            else
-                continue;
-            megacadena=e.getGrupo();
-            megacadena=megacadena.toLowerCase();
-            if(megacadena.contains(cadena))
-                System.out.println(personas[i].getNombre()+" >> grupo :"+personas[i].getGrupo());
-            megacadena="";
+    public void mostrarGrupos(int idPeriodo){
+        int index = 0;
+        for (int i = 0; i <= cGrupos && grupos[i] != null; i++) {
+            if (grupos[i].getIdPeriodo() == idPeriodo) {
+                index++;
+                System.out.println("\t" + index + ".- " + grupos[i].getNombre());
+            }
         }
 	}
 

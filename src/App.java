@@ -6,6 +6,7 @@ public class App {
         Escuela escuelota = new Escuela("ITM", "Yo mero", "www.tec.com");
         int op = 1;
         escuelota.cargarDatos();
+        escuelota.cargarInfo();
         Scanner scanner = new Scanner(System.in);
 
         // Inicio del sistema
@@ -14,7 +15,7 @@ public class App {
         // Inicio del bucle
         try {
             int periodo;
-            int maestro;
+            int grupo;
             do {
                 System.out.println(" = = = = Hola, por favor inicia sesion = = = = = = = =");
                 System.out.print(" >> Usuario        : ");
@@ -23,12 +24,15 @@ public class App {
                 String acceso = scanner.nextLine();
                 if (usuario.equals("admin") && acceso.equals("password")) {
                     break;
+                } else if (usuario.equals("0") && acceso.equals("0")) {
+                    break;
                 } else {
                     System.out.println("\n ** Claves incorrectas\n");
                 }
             } while (true);
             do {
                 // Seleccion periodo
+                escuelota.guardarDatos();System.out.println(" >> Guardado []");
                 System.out.println("\n >> Por favor selecciona el periodo en el que quieres trabajar:");
                 escuelota.mostrarNombrePeriodos();
                 System.out.println("\n\t\t0.- Salir");
@@ -40,15 +44,15 @@ public class App {
                 periodo = escuelota.getPeriodoId(periodo);
                 do {
                     System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
-                    System.out.println("\n >> Por favor selecciona el profesor en el que quieres trabajar:");
-                    escuelota.mostrarProfesores();
+                    System.out.println("\n >> Por favor selecciona el grupo en el que quieres trabajar:");
+                    escuelota.mostrarGrupos(periodo);
                     System.out.println("\n\t\t0.- Salir");
                     System.out.print(" << :");
-                    maestro = scanner.nextInt() - 1;
-                    if (maestro == -1) {
+                    grupo = scanner.nextInt();
+                    if (grupo == -1) {
                         break;
                     }
-                } while (maestro != 0);
+                } while (grupo != 0);
            } while(periodo != 0);
         } catch (Exception e) {
             System.out.println(e);
