@@ -110,7 +110,7 @@ public class App {
                                 System.out.println("\n\t0.- Salir");
                                 System.out.print(" << :");
                                 grupo = scanner.nextInt();
-                                idGrupo = escuelota.getGrupoId(grupo - 1, periodo);
+                                idGrupo = escuelota.getGrupoId(grupo-1, periodo);
                             } catch (Exception e) {
                                 break;
                             }

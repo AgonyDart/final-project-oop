@@ -7,7 +7,7 @@ public class Escuela {
     private String web;
     private Persona personas[] = new Persona[1000];
     private Persona personascopy[] = new Persona[100];
-    private Grupo grupos[] = new Grupo[10];
+    private Grupo grupos[] = new Grupo[100];
     private Periodo periodos[] = new Periodo[100];
     private Calificacion calificaciones[] = new Calificacion[1000];
     private int cPersons;
@@ -241,8 +241,8 @@ public class Escuela {
         int cont = 1;
         int indexEstudiantes[] = indexEstudiantes();
         for (int j = 0; j < cGrupos; j++) {
-            // System.out.println(idGrupo);
-            // System.out.println(grupos[j].getId());
+            System.out.println(idGrupo);
+            System.out.println(grupos[j].getId());
             if (grupos[j].getId().equals(idGrupo)) {
                 // System.out.println("grupo");
                 for (int i = 0; i <= cPersons && personas[i] != null; i++) {
@@ -339,9 +339,12 @@ public class Escuela {
 
     public String getGrupoId(int index, int idPeriodo) {
         String id = "";
+        System.out.println(idPeriodo);
         int index1[] = indexGrupos(idPeriodo);
         int index2 = index1[index];
+        System.out.println(index2);
         id = grupos[index2].getId();
+        System.out.println(id);
         return id;
     }
 
@@ -485,7 +488,7 @@ public class Escuela {
             in.close();
             fileIn.close();
         } catch (Exception i) {
-            // i.printStackTrace();
+            i.printStackTrace();
         }
     }
 
