@@ -42,18 +42,32 @@ public class Grupo implements Interfaz, Serializable {
         System.out.println(">> ID         :" + idGrupo);
     }
 
-    public void capturar() {
+    public void capturar(){
+        System.out.println("Capturar :D");
+    }
+
+    public void capturar(int periodoId) {
         Scanner leer = new Scanner(System.in);
-        System.out.println(">> Nombre  :");
+        idPeriodo = periodoId;
+        System.out.print("\n >> Nombre      :");
         nombre = leer.nextLine();
-        System.out.println(">> Profesor :");
-        refProfesor = leer.nextLine();
-        System.out.println(">> Salon    :");
+        System.out.print(" >> Salon       :");
         refSalon = leer.nextLine();
+        idGrupo =  String.valueOf(genId());
     }
 
     public String queSoy() {
         return "Grupo";
+    }
+
+    private int genId(){
+        String id = "";
+        String number;
+        for (int i = 0; i < 3; i++){
+            number = String.valueOf((int) (Math.random() * 10 + 1));
+            id += number;
+        }
+        return Integer.parseInt(id);
     }
 
     public int getIdPeriodo() {

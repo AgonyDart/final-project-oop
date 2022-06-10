@@ -1,19 +1,20 @@
 import java.util.Scanner;
+import java.io.*;
 
 public class App {
     public static void main(String[] args) {
         boolean ciclo = true;
         Escuela escuelota = new Escuela("ITM", "Yo mero", "www.tec.com");
         int op = 1;
-        escuelota.cargarDatos();
-        escuelota.cargarInfo();
-        Scanner scanner = new Scanner(System.in);
-
-        // Inicio del sistema
-        System.out.println("\n = = = = Bienvenid@ al sistema escolar de " + escuelota.getNombre() + " = = = = ");
-
-        // Inicio del bucle
         try {
+            escuelota.cargarDatos();
+            escuelota.cargarInfo();
+            Scanner scanner = new Scanner(System.in);
+
+            // Inicio del sistema
+            System.out.println("\n = = = = Bienvenid@ al sistema escolar de " + escuelota.getNombre() + " = = = = ");
+
+            // Inicio del bucle
             int periodo;
             int grupo;
             do {
@@ -41,43 +42,43 @@ public class App {
                                 escuelota.mostrarPeriodo();
                                 break;
                             case 12:
-                                
+                                escuelota.capturarPeriodo();
                                 break;
                             case 21:
                                 escuelota.mostrarGrupos();
                                 break;
                             case 22:
-                                
+                                escuelota.capturarGrupo();
                                 break;
                             case 31:
                                 escuelota.mostrarProfesores();
                                 break;
                             case 32:
-                                
+                                escuelota.capturarProfesor();
                                 break;
                             case 33:
-                                
+                                escuelota.buscarProfesores();
                                 break;
                             case 34:
-                                
+                                escuelota.borrarProfesor();
                                 break;
                             case 41:
                                 escuelota.mostrarEstudiantes();
                                 break;
                             case 42:
-                                
+                                escuelota.capturarEstudiante();
                                 break;
                             case 43:
-                                
+                                escuelota.buscarEstudiantes();
                                 break;
                             case 44:
-                                
+                                escuelota.borrarEstudiante();
                                 break;
                             case 51:
                                 escuelota.mostrarCalificaciones();
                                 break;
                             case 52:
-                                
+                                escuelota.capturarCalificaciones();
                                 break;
                             default:
                                 System.out.println("\n>> Operacion no valida");
@@ -149,7 +150,7 @@ public class App {
                                         escuelota.capturarCalificacionesAuto(idGrupo, materia);
                                         break;
                                     default:
-                                        System.out.println("\n>> Operacion no valida");
+                                        // System.out.println("\n>> Operacion no valida");
                                         break;
                                 }
                             } while (op != 0);
@@ -160,7 +161,7 @@ public class App {
                     System.out.println("\n ** Claves incorrectas\n");
                 }
             } while (ciclo);
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println(e);
         }
     }
@@ -183,7 +184,7 @@ public class App {
             case 0:
                 break;
             default:
-                System.out.println("\n>> Operacion no valida");
+                // System.out.println("\n>> Operacion no valida");
                 break;
         }
         return opcion;
@@ -214,7 +215,8 @@ public class App {
         Scanner read = new Scanner(System.in);
         int opcion = 0;
         try {
-            System.out.print(" 1.- Periodos\t\t2.- Grupos\t\t3.- Profesores\n 4.- Estudiantes\t5.- Calificaciones\t6.- Guardar\n\n 0.-Salir\n\n << :");
+            System.out.print(
+                    " 1.- Periodos\t\t2.- Grupos\t\t3.- Profesores\n 4.- Estudiantes\t5.- Calificaciones\t6.- Guardar\n\n 0.-Salir\n\n << :");
             opcion = read.nextInt();
             switch (opcion) {
                 case 0:
@@ -222,7 +224,7 @@ public class App {
                 case 1:
                 case 2:
                 case 5:
-                    System.out.println("\n1.- Mostrar     2.-Capturar    0.-Salir");
+                    System.out.print("\n1.- Mostrar     2.-Capturar    0.-Salir\n\n << :");
                     opcion = (opcion * 10) + read.nextInt();
                     break;
                 case 3:
@@ -247,10 +249,10 @@ public class App {
     // Metodos de la version anterior
 
     public static int menuProfesoresAdmin() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.print("\n1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir\n\n << :");
-    int op = 30 + scanner.nextInt();
-    return op;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\n1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir\n\n << :");
+        int op = 30 + scanner.nextInt();
+        return op;
     }
 
     // public static int menuGrupo() {

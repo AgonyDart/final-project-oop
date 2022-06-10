@@ -297,6 +297,13 @@ public class Escuela {
         return estud[select - 1].getNoSS();
     }
 
+    public void capturarEstudiante() {
+        personas[cPersons] = new Estudiante();
+        personas[cPersons].capturar();
+        cPersons++;
+        cEstudiantes++;
+    }
+
     public void capturarEstudianteGrupo(String idGrupo) {
         String nombreGrupo ="";
         for (int i = 0; i < cGrupos; i++) {
@@ -478,7 +485,7 @@ public class Escuela {
             in.close();
             fileIn.close();
         } catch (Exception i) {
-            i.printStackTrace();
+            // i.printStackTrace();
         }
     }
 
@@ -491,8 +498,10 @@ public class Escuela {
     }
 
     public void capturarGrupo() {
+        System.out.println("\n << << Capturar Grupo >> >>");
+        int idPed = seleccionPeriodo();
         grupos[cGrupos] = new Grupo();
-        grupos[cGrupos].capturar();
+        grupos[cGrupos].capturar(idPed);
         cGrupos++;
     }
 
@@ -617,6 +626,19 @@ public class Escuela {
         calificaciones[cCalif] = new Calificacion();
         calificaciones[cCalif].capturar();
         cCalif++;
+    }
+
+    public int seleccionPeriodo(){
+        Scanner read = new Scanner(System.in);
+        int idPeriodo = 0;
+        System.out.print("\n >> Selecciona el periodo para el grupo a capturar:\n");
+        for (int i = 0; i < cPeriodos; i++) {
+            System.out.println((i+1) + ".- " + periodos[i].getNombre());
+        }
+        System.out.print("\n << :");
+        int seleccion = read.nextInt();
+        idPeriodo = periodos[seleccion-1].getIdPeriodo();
+        return idPeriodo;
     }
 
     // encapsulamiento
