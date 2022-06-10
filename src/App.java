@@ -8,7 +8,7 @@ public class App {
         int op = 1;
         try {
             escuelota.cargarDatos();
-            escuelota.cargarInfo();
+            //escuelota.cargarInfo();
             Scanner scanner = new Scanner(System.in);
 
             // Inicio del sistema

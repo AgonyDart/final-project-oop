@@ -241,8 +241,8 @@ public class Escuela {
         int cont = 1;
         int indexEstudiantes[] = indexEstudiantes();
         for (int j = 0; j < cGrupos; j++) {
-            System.out.println(idGrupo);
-            System.out.println(grupos[j].getId());
+            // System.out.println(idGrupo);
+            // System.out.println(grupos[j].getId());
             if (grupos[j].getId().equals(idGrupo)) {
                 // System.out.println("grupo");
                 for (int i = 0; i <= cPersons && personas[i] != null; i++) {
@@ -339,12 +339,12 @@ public class Escuela {
 
     public String getGrupoId(int index, int idPeriodo) {
         String id = "";
-        System.out.println(idPeriodo);
+        //System.out.println(idPeriodo);
         int index1[] = indexGrupos(idPeriodo);
         int index2 = index1[index];
-        System.out.println(index2);
+        //System.out.println(index2);
         id = grupos[index2].getId();
-        System.out.println(id);
+        //System.out.println(id);
         return id;
     }
 
@@ -503,10 +503,29 @@ public class Escuela {
     public void capturarGrupo() {
         System.out.println("\n << << Capturar Grupo >> >>");
         int idPed = seleccionPeriodo();
+        // String refProfesor1 = seleccionProfe();
+        // String refProfesor2 = seleccionProfe();
+        // String refProfesor3 = seleccionProfe();
+        // String refProfesor4 = seleccionProfe();
+        // String refProfesor5 = seleccionProfe();
+        // String refProfesor6 = seleccionProfe();
         grupos[cGrupos] = new Grupo();
         grupos[cGrupos].capturar(idPed);
         cGrupos++;
     }
+
+    // public String seleccionProfe() {
+    //     String refReturn = "";
+    //     int cont = 0; 
+    //     for (int i = 0; i < cPersons; i++) {
+    //         if (personas[i].queSoy().equals("Profesor")) {
+    //             System.out.println(" " + (cont + 1) + ".- " + personas[i].getNombre());
+    //             cont++;
+    //         }
+    //     }
+    //     int indexArray[] = indexProfesores();
+    //     System.out.print(" >> Selecciona un profesor a asignar al grupo\n <<:");
+    // }
 
     public void mostrarGrupos() {
         for (int i = 0; i < cGrupos; i++)
@@ -539,7 +558,7 @@ public class Escuela {
                 for (int k = 0; k < refProfesor.length; k++) {
                     if (noSS.equals(refProfesor[k])) {
                         System.out.println((cont + 1) + ".- " + e.getAsignatura());
-                        materias[i]=e.getAsignatura();
+                        materias[k]=e.getAsignatura();
                         cont++;
                     }
                 }

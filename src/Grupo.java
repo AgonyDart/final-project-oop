@@ -52,6 +52,12 @@ public class Grupo implements Interfaz, Serializable {
         System.out.print("\n >> Nombre      :");
         nombre = leer.nextLine();
         System.out.print(" >> Salon       :");
+        refprofesor1[0] = "FE007";
+        refprofesor1[1] = "JU003";
+        refprofesor1[2] = "LE007";
+        refprofesor1[3] = "RA007";
+        refprofesor1[4] = "SA006";
+        refprofesor1[5] = "PE032";
         refSalon = leer.nextLine();
         idGrupo =  String.valueOf(genId());
     }
