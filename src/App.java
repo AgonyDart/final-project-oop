@@ -10,7 +10,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         // Inicio del sistema
-        System.out.println("\n = = = = Bienvenid@ a el sistema escolar de " + escuelota.getNombre() + " = = = = ");
+        System.out.println("\n = = = = Bienvenid@ al sistema escolar de " + escuelota.getNombre() + " = = = = ");
 
         // Inicio del bucle
         try {
@@ -33,37 +33,40 @@ public class App {
             } while (true);
             do {
                 // Seleccion periodo
-                escuelota.guardarDatos();System.out.println(" >> Guardado []");
+                escuelota.guardarDatos();
+                System.out.println(" >> Guardado []");
                 System.out.println("\n >> Por favor selecciona el periodo en el que quieres trabajar:");
                 escuelota.mostrarNombrePeriodos();
                 System.out.println("\n\t\t0.- Salir");
                 System.out.print(" << :");
-                periodo = scanner.nextInt()-1;
+                periodo = scanner.nextInt() - 1;
                 if (periodo == -1) {
                     break;
                 }
                 periodo = escuelota.getPeriodoId(periodo);
+                String idGrupo = "";
                 do {
-                    System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
-                    System.out.println("\n >> Por favor selecciona el grupo en el que quieres trabajar:");
-                    escuelota.mostrarGrupos(periodo);
-                    System.out.println("\n\t0.- Salir");
-                    System.out.print(" << :");
-                    grupo = scanner.nextInt();
-                    if (grupo == -1) {
+                    try {
+                        System.out.println("\n >> Trabajando en: " + escuelota.getPeriodoNombre(periodo));
+                        System.out.println("\n >> Por favor selecciona el grupo en el que quieres trabajar:");
+                        escuelota.mostrarGrupos(periodo);
+                        System.out.println("\n\t0.- Salir");
+                        System.out.print(" << :");
+                        grupo = scanner.nextInt();
+                        idGrupo = escuelota.getGrupoId(grupo - 1, periodo);
+                    } catch (Exception e) {
                         break;
                     }
                     System.out.println("\n >> Por favor selecciona la materia para registrar calificaciones:");
-                    escuelota.mostrarProfesoresGrupo(grupo-1, periodo);
-                    System.out.println("\n\t0.- Salir");
-                    System.out.print(" << :");
-                    asignatura = scanner.nextInt();
-                    if (asignatura == 0) {
+                    String materia = "";
+                    try {
+                        materia = escuelota.mostrarProfesoresGrupo(grupo - 1, periodo);
+                    } catch (Exception e) {
                         break;
                     }
                     do {
                         op = mostrarMenu();
-                        switch(op) {
+                        switch (op) {
                             case 0:
                                 ciclo = false;
                                 break;
@@ -72,7 +75,7 @@ public class App {
                                 System.out.println(" >> Guardado []");
                                 break;
                             case 11:
-                                escuelota.mostrarEstudiantes(grupo);
+                                escuelota.mostrarEstudiantesGrupo(idGrupo);
                                 break;
                             case 12:
                                 escuelota.capturarEstudiante();
@@ -87,12 +90,12 @@ public class App {
                                 escuelota.mostrarCalificaciones();
                                 break;
                             case 22:
-                                escuelota.capturarCalificaciones();
+                                escuelota.capturarCalificacionesAuto(idGrupo, materia);
                                 break;
                         }
                     } while (op != 0);
                 } while (grupo != 0);
-           } while(periodo != 0);
+            } while (periodo != 0);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -133,18 +136,19 @@ public class App {
         return op;
     }
 
-    // Metodos para la vercion anterior
+    // Metodos para la version anterior
     // public static int menuProfesores() {
-    //     Scanner scanner = new Scanner(System.in);
-    //     System.out.println("1.- Mostrar     2.-Capturar     3.-Buscar      4.-Borrar    0.-Salir");
-    //     int op = 20 + scanner.nextInt();
-    //     return op;
+    // Scanner scanner = new Scanner(System.in);
+    // System.out.println("1.- Mostrar 2.-Capturar 3.-Buscar 4.-Borrar 0.-Salir");
+    // int op = 20 + scanner.nextInt();
+    // return op;
     // }
 
     // public static int menuGrupo() {
-    //     Scanner scanner = new Scanner(System.in);
-    //     System.out.println("1.- Mostrar     2.-Capturar     3.-Lista de Estudiantes   0.-Salir");
-    //     int op = 30 + scanner.nextInt();
-    //     return op;
+    // Scanner scanner = new Scanner(System.in);
+    // System.out.println("1.- Mostrar 2.-Capturar 3.-Lista de Estudiantes
+    // 0.-Salir");
+    // int op = 30 + scanner.nextInt();
+    // return op;
     // }
 }

@@ -7,7 +7,7 @@ public class Grupo implements Interfaz, Serializable {
     private String nombre;
     private String idGrupo;
     private String refProfesor;
-    private String[] refprofesor1 = new String[6];
+    private String[] refprofesor1 = new String[7];
 
     public Grupo(){}
 
@@ -90,5 +90,9 @@ public class Grupo implements Interfaz, Serializable {
 
     public void setRefProfesor1(String[] refprofesor1) {
         this.refprofesor1 = refprofesor1;
+    }
+
+    public String getId(){
+        return idGrupo;
     }
 }

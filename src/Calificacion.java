@@ -1,5 +1,7 @@
 import java.util.Scanner;
-public class Calificacion {
+import java.io.*;
+
+public class Calificacion implements java.io.Serializable {
     private String idEstudiante;
     private String idGrupo;
     private String idMateria;
@@ -15,7 +17,7 @@ public class Calificacion {
         this.bimestre = bimestre;
         this.calificacion = calificacion;
     }
-    
+
     public void mostrar() {
         System.out.println("\n << << Mostrar Califiacion >> >>");
         System.out.println(">> Estudiante        :" + idEstudiante);
@@ -24,7 +26,7 @@ public class Calificacion {
         System.out.println(">> Bimestre          :" + bimestre);
         System.out.println(">> Calificacion      :" + calificacion);
     }
-    
+
     public void capturar() {
         Scanner leer = new Scanner(System.in);
         System.out.println("\n( >> >> Capturar Calificaciones << << )");
@@ -34,6 +36,17 @@ public class Calificacion {
         idGrupo = leer.nextLine();
         System.out.print("<< Materia          :");
         idMateria = leer.nextLine();
+        System.out.print("<< Bimestre         :");
+        bimestre = leer.nextLine();
+        System.out.print("<< Calificacion     :");
+        calificacion = leer.nextInt();
+    }
+
+    public void capturarAuto(String idEstudianteR, String idGrupoR, String idMateriaR) {
+        Scanner leer = new Scanner(System.in);
+        idEstudiante = idEstudianteR;
+        idGrupo = idGrupoR;
+        idMateria = idMateriaR;
         System.out.print("<< Bimestre         :");
         bimestre = leer.nextLine();
         System.out.print("<< Calificacion     :");
@@ -79,5 +92,5 @@ public class Calificacion {
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
-    
+
 }

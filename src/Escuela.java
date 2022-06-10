@@ -102,7 +102,7 @@ public class Escuela {
         grupos[7] = new Grupo(1003, "T1", "2A", "302", "LE007", "SA006", "SA006", "SA006", "SA006", "SA006");
         grupos[8] = new Grupo(1003, "L7", "3B", "303", "LE007", "SA006", "SA006", "SA006", "SA006", "SA006");
 
-        cGrupos = 8;
+        cGrupos = 9;
 
         personas[0] = new Profesor("Leonardo G.", "44318232334", "LE007", "1A", "rfc", "1234 5678", "Licenciatura",
                 "Matematicas");
@@ -127,7 +127,8 @@ public class Escuela {
         personas[11] = new Estudiante("Estudiante 3", "4437778899", "ES003", "1A", "TIDA031201HMNNRNA0", "m", true);
         personas[12] = new Estudiante("Estudiante 4", "4437778899", "ES004", "2A", "TIDA031201HMNNRNA0", "m", true);
         personas[13] = new Estudiante("Estudiante 5", "4437778899", "ES005", "2A", "TIDA031201HMNNRNA0", "m", true);
-        cPersons = 13;
+        personas[14] = new Estudiante("Estudiante 6", "4437778899", "ES005", "2B", "TIDA031201HMNNRNA0", "m", true);
+        cPersons = 15;
 
     }
 
@@ -236,6 +237,59 @@ public class Escuela {
         }
     }
 
+    public void mostrarEstudiantesGrupo(String idGrupo) {
+        int cont = 1;
+        for (int j = 0; j < cGrupos; j++) {
+            // System.out.println(idGrupo);
+            // System.out.println(grupos[j].getId());
+            if (grupos[j].getId().equals(idGrupo)) {
+                // System.out.println("grupo");
+                for (int i = 0; i <= cPersons && personas[i] != null; i++) {
+                    if (personas[i].queSoy().equals("Estudiante")) {
+                        // System.out.println("est");
+                        // System.out.println(personas[i].getGrupo());
+                        // System.out.println(grupos[j].getNombre());
+                        if (personas[i].getGrupo().equals(grupos[j].getNombre())) {
+                            // System.out.println("p grupo");
+                            System.out.println(cont + ".- " + personas[i].getNombre());
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public String selecionEstudiantesGrupo(String idGrupo) {
+        int cont = 1;
+        Scanner read = new Scanner(System.in);
+        Estudiante estud[] = new Estudiante[20];
+        for (int j = 0; j < cGrupos; j++) {
+            // System.out.println(idGrupo);
+            // System.out.println(grupos[j].getId());
+            if (grupos[j].getId().equals(idGrupo)) {
+                // System.out.println("grupo");
+                for (int i = 0; i <= cPersons && personas[i] != null; i++) {
+                    if (personas[i].queSoy().equals("Estudiante")) {
+                        // System.out.println("est");
+                        // System.out.println(personas[i].getGrupo());
+                        // System.out.println(grupos[j].getNombre());
+                        if (personas[i].getGrupo().equals(grupos[j].getNombre())) {
+                            // System.out.println("p grupo");
+                            System.out.println(cont + ".- " + personas[i].getNombre());
+                            estud[cont - 1] = (Estudiante) personas[i];
+                            cont++;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(" >> Selecciona el alumno a evaluar : ");
+        System.out.print(" << : ");
+        int select = read.nextInt();
+        return estud[select - 1].getNoSS();
+    }
+
     public void capturarEstudiante() {
         personas[cPersons] = new Estudiante();
         personas[cPersons].capturar();
@@ -261,6 +315,14 @@ public class Escuela {
         cPersons--;
         System.arraycopy(personascopy, 0, personas, 0, cPersons);
         System.out.println("Eliminado, NO OLVIDES GUARDAR LOS CAMBIOS");
+    }
+
+    public String getGrupoId(int index, int idPeriodo) {
+        String id = "";
+        int index1[] = indexGrupos(idPeriodo);
+        int index2 = index1[index];
+        id = grupos[index2].getId();
+        return id;
     }
 
     public int[] indexEstudiantes() {
@@ -406,6 +468,14 @@ public class Escuela {
         }
     }
 
+    public void capturarCalificacionesAuto(String idGrupo, String idMateria) {
+        System.out.println("\n( >> >> Capturar Calificaciones << << )");
+        String idEst = selecionEstudiantesGrupo(idGrupo);
+        calificaciones[cCalif] = new Calificacion();
+        calificaciones[cCalif].capturarAuto(idEst, idGrupo, idMateria);
+        cCalif++;
+    }
+
     public void capturarGrupo() {
         grupos[cGrupos] = new Grupo();
         grupos[cGrupos].capturar();
@@ -427,8 +497,9 @@ public class Escuela {
         }
     }
 
-    public void mostrarProfesoresGrupo(int index, int idPeriodo) {
+    public String mostrarProfesoresGrupo(int index, int idPeriodo) {
         Scanner con = new Scanner(System.in);
+        String materias[]=new String[20];
         int index1[] = indexGrupos(idPeriodo);
         int index2 = index1[index];
         String[] refProfesor = grupos[index2].getRefProfesor1();
@@ -438,13 +509,20 @@ public class Escuela {
             Profesor e;
             if (personas[i].queSoy().equals("Profesor")) {
                 e = (Profesor) personas[i];
-                String noSS = e.getNoSS().toLowerCase();
-                if (noSS.equals(refProfesor)) {
-                    System.out.println("\t" + (cont + 1) + ".- " + e.getAsignatura() + "\t->" + e.getNombre());
-                    cont++;
+                String noSS = e.getNoSS();
+                for (int k = 0; k < refProfesor.length; k++) {
+                    if (noSS.equals(refProfesor[k])) {
+                        System.out.println((cont + 1) + ".- " + e.getAsignatura());
+                        materias[i]=e.getAsignatura();
+                        cont++;
+                    }
                 }
             }
         }
+        System.out.println("\n\t0.- Salir");
+        System.out.print(" << :");
+        index = con.nextInt();
+        return materias[index-1];
     }
 
     public int[] indexGrupos(int idPeriodo) {
@@ -492,8 +570,8 @@ public class Escuela {
     }
 
     public void mostrarCalificaciones() {
-        for (int i = 0; i < cPeriodos; i++) {
-            periodos[i].mostrar();
+        for (int i = 0; i < cCalif; i++) {
+            calificaciones[i].mostrar();
         }
     }
 
