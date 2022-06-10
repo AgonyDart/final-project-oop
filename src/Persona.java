@@ -30,8 +30,20 @@ public abstract class Persona implements Interfaz, java.io.Serializable {
         telefono = leer.nextLine();
         System.out.print("<< Seguro Social  :");
         noSS = leer.nextLine();
-        System.out.print("<< Grupo          :");
+        // System.out.print("<< Grupo          :");
         grupo = leer.nextLine();
+    }
+
+    public void capturarConGrupo(String nombreGrupo){
+        Scanner leer = new Scanner(System.in);
+        System.out.print("<< Nombre         :");
+        nombre = leer.nextLine();
+        System.out.print("<< Telefono       :");
+        telefono = leer.nextLine();
+        System.out.print("<< Seguro Social  :");
+        noSS = leer.nextLine();
+        // System.out.print("<< Grupo          :");
+        grupo = nombreGrupo;
     }
 
     public String queSoy(){

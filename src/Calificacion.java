@@ -19,7 +19,7 @@ public class Calificacion implements java.io.Serializable {
     }
 
     public void mostrar() {
-        System.out.println("\n << << Mostrar Califiacion >> >>");
+        System.out.println("\n << << Mostrar Calificacion >> >>");
         System.out.println(">> Estudiante        :" + idEstudiante);
         System.out.println(">> Grupo             :" + idGrupo);
         System.out.println(">> Materia           :" + idMateria);

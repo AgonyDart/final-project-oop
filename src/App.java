@@ -78,7 +78,7 @@ public class App {
                                 escuelota.mostrarEstudiantesGrupo(idGrupo);
                                 break;
                             case 12:
-                                escuelota.capturarEstudiante();
+                                escuelota.capturarEstudianteGrupo(idGrupo);
                                 break;
                             case 13:
                                 escuelota.buscarEstudiantes();
@@ -87,7 +87,7 @@ public class App {
                                 escuelota.borrarEstudiante();
                                 break;
                             case 21:
-                                escuelota.mostrarCalificaciones();
+                                escuelota.mostrarCalificaciones(idGrupo);
                                 break;
                             case 22:
                                 escuelota.capturarCalificacionesAuto(idGrupo, materia);

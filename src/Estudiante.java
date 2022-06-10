@@ -28,14 +28,24 @@ public class Estudiante extends Persona{
 
     @Override
     public void capturar() {
-        Scanner con=new Scanner(System.in);
+        Scanner con = new Scanner(System.in);
         System.out.println("\n( >> >> Capturar Estudiante << << )");
         super.capturar();
         noControl= "2112"+ nombre.substring(0,1);
         System.out.print(">> Genero         :" );
         genero=con.nextLine();
         estado=true;
+    }
 
+    @Override
+    public void capturarConGrupo(String nombreGrupo) {
+        Scanner con = new Scanner(System.in);
+        System.out.println("\n( >> >> Capturar Estudiante << << )");
+        super.capturarConGrupo(nombreGrupo);
+        noControl= "2112" + nombre.substring(0,1);
+        System.out.print(">> Genero         :" );
+        genero=con.nextLine();
+        estado=true;
     }
 
     @Override

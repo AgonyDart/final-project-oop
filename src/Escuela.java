@@ -229,8 +229,7 @@ public class Escuela {
         }
         // System.out.println(cEstudiantes);
         System.out.println(" = = = = = = = =");
-        System.out.print(
-                " >> Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0\n\n << :");
+        System.out.print(" >> Si quieres ver los datos de algun estudiante selecciona el numero\n >> De lo contrario selecciona 0\n\n << :");
         int opcion = con.nextInt() - 1;
         if (opcion != -1) {
             personas[indexEstudiantes[opcion]].mostrar();
@@ -239,6 +238,7 @@ public class Escuela {
 
     public void mostrarEstudiantesGrupo(String idGrupo) {
         int cont = 1;
+        int indexEstudiantes[] = indexEstudiantes();
         for (int j = 0; j < cGrupos; j++) {
             // System.out.println(idGrupo);
             // System.out.println(grupos[j].getId());
@@ -258,12 +258,18 @@ public class Escuela {
                 }
             }
         }
+        // System.out.print(" >> Si quieres ver los datos de algun estudiante selecciona el numero\n >> De lo contrario selecciona 0\n\n << :");
+        // int opcion = con.nextInt() - 1;
+        // if (opcion != -1) {
+        //     personas[indexEstudiantes[opcion]].mostrar();
+        // }
     }
 
     public String selecionEstudiantesGrupo(String idGrupo) {
         int cont = 1;
         Scanner read = new Scanner(System.in);
         Estudiante estud[] = new Estudiante[20];
+        System.out.println();
         for (int j = 0; j < cGrupos; j++) {
             // System.out.println(idGrupo);
             // System.out.println(grupos[j].getId());
@@ -284,15 +290,21 @@ public class Escuela {
                 }
             }
         }
-        System.out.println(" >> Selecciona el alumno a evaluar : ");
+        System.out.println("\n >> Selecciona el alumno: ");
         System.out.print(" << : ");
         int select = read.nextInt();
         return estud[select - 1].getNoSS();
     }
 
-    public void capturarEstudiante() {
+    public void capturarEstudianteGrupo(String idGrupo) {
+        String nombreGrupo ="";
+        for (int i = 0; i < cGrupos; i++) {
+            if (grupos[i].getId().equals(idGrupo)){
+                nombreGrupo = grupos[i].getNombre();
+            }
+        }
         personas[cPersons] = new Estudiante();
-        personas[cPersons].capturar();
+        personas[cPersons].capturarConGrupo(nombreGrupo);
         cPersons++;
         cEstudiantes++;
     }
@@ -572,6 +584,30 @@ public class Escuela {
     public void mostrarCalificaciones() {
         for (int i = 0; i < cCalif; i++) {
             calificaciones[i].mostrar();
+        }
+    }
+
+    public void mostrarCalificaciones(String idGrupo) {
+        String idEst = selecionEstudiantesGrupo(idGrupo);
+        int atLeastOnce = 0;
+        // System.out.println(idEst);
+        for (int j = 0; j < cGrupos; j++) {
+            if (grupos[j].getId().equals(idGrupo)) {
+                // System.out.println(idGrupo);
+                for (int i = 0; i < cPersons; i++) {
+                    if(personas[i].queSoy().equals("Estudiante") && (personas[i].getNoSS().equals(idEst))){
+                        for (int k = 0; k < cCalif; k++) {
+                            if (calificaciones[k].getIdEstudiante().equals(idEst)) {
+                                calificaciones[k].mostrar();
+                                atLeastOnce++;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (atLeastOnce == 0) {
+            System.out.println("\n >> No hay calificaciones disponibles para este alumno");
         }
     }
 
