@@ -9,16 +9,19 @@ public class Grupo implements Interfaz, Serializable {
     private String refProfesor;
     private String[] refprofesor1 = new String[7];
 
-    public Grupo(){}
+    public Grupo() {
+    }
 
-    public Grupo(int idPeriodo, String refSalon, String nombre, String idGrupo,String refProfesor) {
+    public Grupo(int idPeriodo, String refSalon, String nombre, String idGrupo, String refProfesor) {
         this.idPeriodo = idPeriodo;
         this.refSalon = refSalon;
         this.nombre = nombre;
         this.idGrupo = idGrupo;
         this.refProfesor = refProfesor;
     }
-    public Grupo(int idPeriodo, String refSalon, String nombre, String idGrupo,String refProfesor,String refProfesor2,String refProfesor3,String refProfesor4,String refProfesor5,String refProfesor6) {
+
+    public Grupo(int idPeriodo, String refSalon, String nombre, String idGrupo, String refProfesor, String refProfesor2,
+            String refProfesor3, String refProfesor4, String refProfesor5, String refProfesor6) {
         this.idPeriodo = idPeriodo;
         this.refSalon = refSalon;
         this.nombre = nombre;
@@ -32,32 +35,32 @@ public class Grupo implements Interfaz, Serializable {
     }
 
     public void mostrar() {
-      System.out.println(">> Periodo    :"+idPeriodo);
-      System.out.println(">> Salon      :"+refSalon);
-      System.out.println(">> Nombre     :"+nombre);
-      System.out.println(">> ID         :"+idGrupo);
-      System.out.println(">> Profesor   :"+refProfesor);
+        System.out.println("\n << << Mostrar Grupo >> >>");
+        System.out.println(">> Periodo    :" + idPeriodo);
+        System.out.println(">> Salon      :" + refSalon);
+        System.out.println(">> Nombre     :" + nombre);
+        System.out.println(">> ID         :" + idGrupo);
     }
 
     public void capturar() {
-      Scanner leer = new Scanner(System.in);
-      System.out.println(">> Nombre  :");
-      nombre = leer.nextLine();
-      System.out.println(">> Profesor :");
-      refProfesor = leer.nextLine();
-      System.out.println(">> Salon    :");
-      refSalon = leer.nextLine();
+        Scanner leer = new Scanner(System.in);
+        System.out.println(">> Nombre  :");
+        nombre = leer.nextLine();
+        System.out.println(">> Profesor :");
+        refProfesor = leer.nextLine();
+        System.out.println(">> Salon    :");
+        refSalon = leer.nextLine();
     }
 
     public String queSoy() {
         return "Grupo";
     }
 
-    public int getIdPeriodo(){
+    public int getIdPeriodo() {
         return idPeriodo;
     }
 
-    public void setIdPeriodo(int idPeriodo){
+    public void setIdPeriodo(int idPeriodo) {
         this.idPeriodo = idPeriodo;
     }
 
@@ -84,6 +87,7 @@ public class Grupo implements Interfaz, Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
     public String[] getRefProfesor1() {
         return refprofesor1;
     }
@@ -92,7 +96,7 @@ public class Grupo implements Interfaz, Serializable {
         this.refprofesor1 = refprofesor1;
     }
 
-    public String getId(){
+    public String getId() {
         return idGrupo;
     }
 }

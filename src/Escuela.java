@@ -201,14 +201,15 @@ public class Escuela {
         Scanner con = new Scanner(System.in);
         int c = 0;
         int indexEstudiantes[] = indexEstudiantes();
+        System.out.println();
         for (int i = 0; i < cPersons; i++) {
             if (personas[i].queSoy().equalsIgnoreCase("Estudiante")) {
                 System.out.println((c + 1) + ".- " + personas[i].getNombre());
                 c++;
             }
         }
-        System.out.println(
-                " >> Si quieres ver los datos de algun estudiante selecciona el numero \nde lo contrario selecciona 0");
+        System.out.print(
+                "\n >> Si quieres ver los datos de algun estudiante selecciona el numero \n\tde lo contrario selecciona 0\n << :");
         int opcion = con.nextInt() - 1;
         if (opcion != -1) {
             personas[indexEstudiantes[opcion]].mostrar();
@@ -382,14 +383,15 @@ public class Escuela {
         Scanner con = new Scanner(System.in);
         int cont = 0;
         int indexProfesores[] = indexProfesores();
+        System.out.println();
         for (int i = 0; i < cPersons; i++) {
             if (personas[i].queSoy().equalsIgnoreCase("Profesor")) {
                 System.out.println("\t" + (cont + 1) + ".- " + personas[i].getNombre());
                 cont++;
             }
         }
-        System.out.println(
-                "Si quieres ver los datos de algun Profesor selecciona el numero \nde lo contrario selecciona 0");
+        System.out.print(
+                "\n >> Si quieres ver los datos de algun Profesor selecciona el numero \n\tde lo contrario selecciona 0\n << :");
         int opcio = con.nextInt() - 1;
         if (opcio != -1) {
             personas[indexProfesores[opcio]].mostrar();

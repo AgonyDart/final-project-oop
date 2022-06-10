@@ -30,6 +30,59 @@ public class App {
                         System.out.println("\n >> Trabajando como administrador:\n");
                         seleccion = mostrarAdminMenu();
                         // System.out.println(seleccion);
+                        switch (seleccion) {
+                            case 0:
+                                break;
+                            case 6:
+                                escuelota.guardarDatos();
+                                System.out.println(" >> Guardado []");
+                                break;
+                            case 11:
+                                escuelota.mostrarPeriodo();
+                                break;
+                            case 12:
+                                
+                                break;
+                            case 21:
+                                escuelota.mostrarGrupos();
+                                break;
+                            case 22:
+                                
+                                break;
+                            case 31:
+                                escuelota.mostrarProfesores();
+                                break;
+                            case 32:
+                                
+                                break;
+                            case 33:
+                                
+                                break;
+                            case 34:
+                                
+                                break;
+                            case 41:
+                                escuelota.mostrarEstudiantes();
+                                break;
+                            case 42:
+                                
+                                break;
+                            case 43:
+                                
+                                break;
+                            case 44:
+                                
+                                break;
+                            case 51:
+                                escuelota.mostrarCalificaciones();
+                                break;
+                            case 52:
+                                
+                                break;
+                            default:
+                                System.out.println("\n>> Operacion no valida");
+                                break;
+                        }
                     } while (seleccion != 0);
 
                     break;
