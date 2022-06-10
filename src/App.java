@@ -6,7 +6,7 @@ public class App {
         Escuela escuelota = new Escuela("ITM", "Yo mero", "www.tec.com");
         int op = 1;
         escuelota.cargarDatos();
-        escuelota.cargarInfo();
+        //escuelota.cargarInfo();
         Scanner scanner = new Scanner(System.in);
 
         // Inicio del sistema
@@ -61,6 +61,7 @@ public class App {
                     String materia = "";
                     try {
                         materia = escuelota.mostrarProfesoresGrupo(grupo - 1, periodo);
+                        System.out.println(materia);
                     } catch (Exception e) {
                         break;
                     }

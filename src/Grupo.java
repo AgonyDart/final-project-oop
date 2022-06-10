@@ -7,7 +7,7 @@ public class Grupo implements Interfaz, Serializable {
     private String nombre;
     private String idGrupo;
     private String refProfesor;
-    private String[] refprofesor1 = new String[7];
+    private String[] refprofesor1 = new String[8];
 
     public Grupo(){}
 

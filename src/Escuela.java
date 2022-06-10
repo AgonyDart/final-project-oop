@@ -525,7 +525,7 @@ public class Escuela {
                 for (int k = 0; k < refProfesor.length; k++) {
                     if (noSS.equals(refProfesor[k])) {
                         System.out.println((cont + 1) + ".- " + e.getAsignatura());
-                        materias[i]=e.getAsignatura();
+                        materias[k]=e.getAsignatura();
                         cont++;
                     }
                 }
